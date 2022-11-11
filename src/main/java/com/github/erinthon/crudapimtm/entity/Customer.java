@@ -15,6 +15,9 @@ public class Customer {
     @Column(name="id")
     private Integer id;
 
+    @Column(name = "document_id", unique=true)
+    private Long documentId;
+
     @Column(name="name")
     private String name;
 
@@ -24,6 +27,10 @@ public class Customer {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "registration_date", nullable = false, updatable = false)
     private Date registrationDate = new Date();
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "last_update", nullable = false)
+    private Date lastUpdate = new Date();
 
     @ManyToMany(fetch=FetchType.LAZY, cascade= {CascadeType.ALL})
     @JoinTable(
@@ -52,6 +59,14 @@ public class Customer {
         this.id = id;
     }
 
+    public Long getDocumentId() {
+        return documentId;
+    }
+
+    public void setDocumentId(Long documentId) {
+        this.documentId = documentId;
+    }
+
     public String getName() {
         return name;
     }
@@ -74,6 +89,14 @@ public class Customer {
 
     public void setRegistrationDate(Date registrationDate) {
         this.registrationDate = registrationDate;
+    }
+
+    public Date getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(Date lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
 
     public List<Address> getAddresses() {
